@@ -1,20 +1,12 @@
-name: On Pull Request
-
+name: Lint Commit Messages
 on: [pull_request]
-
 jobs:
-
-  lint-commit:
-    runs-on: ubuntu-latest
+  commitlint:
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: 0
-      - uses: wagoid/commitlint-github-action@v1
-        with:
-          configFile: './.commitlintrc.yml'
-          firstParent: false
-          failOnWarnings: true
-
+      - uses: wagoid/commitlint-github-action@v5
